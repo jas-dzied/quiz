@@ -1,0 +1,41 @@
+{
+    "Countries": [
+        {
+            "type": "multiple choice",
+            "prompt": "What is the largest country in the world?",
+            "options": [
+                "Russia",
+                "China",
+                "Canada",
+                "Australia"
+            ],
+            "answer": "Russia"
+        },
+        {
+            "type": "single answer",
+            "prompt": "How many countries border the USA?",
+            "answer": "2"
+        },
+        {
+            "type": "options",
+            "prompt": "Name a country that borders China",
+            "answers": [
+                "Vietnam",
+                "Russia",
+                "Mongolia",
+                "Nepal"
+            ]
+        }
+    ],
+    "Movies": [
+        {
+            "type": "multiple choice",
+            "prompt": "questionadawdawd",
+            "options": [
+                "Correct",
+                "Wrong"
+            ],
+            "answer": "Correct"
+        }
+    ]
+}
