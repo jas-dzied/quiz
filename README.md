@@ -34,3 +34,7 @@ The lists are a list of questions, which are also objects. They all have a `type
 | multiple choice | Takes in a list of options and presents them to the user to pick from.                                | `type`, `prompt`, `options`, `answer` |
 | single answer   | Takes a single input from the user and compares it to the correct answer.                             | `type`, `prompt`, `answer`            |
 | options         | Takes in a single input and checks if it is in the provided list of strings that are correct answers. | `type`, `prompt`, `answers`           |
+
+### Testing
+
+A `test.py` file is provided which contains unit tests for the questions. This can be run with `python test.py`.
