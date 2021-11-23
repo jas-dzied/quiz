@@ -1,6 +1,7 @@
 """Quiz- A python program that uses a JSON file containing quiz questions to test the user"""
 
 import json
+import sys
 from user_input import Question, choose_menu, MultipleChoice, SingleAnswer, Options
 
 def ask_questions(questions: list[Question]) -> None:
@@ -47,8 +48,12 @@ def generate_questions(file_path: str) -> dict[str, list[Question]]:
                 question_list.append(Options(question["prompt"], question["answers"]))
             elif question["type"] == "single answer":
                 question_list.append(SingleAnswer(question["prompt"], question["answer"]))
+            else:
+                print(f"Unknown question type: {question['type']}")
+                sys.exit(1)
         result[name] = question_list
     return result
 
-quizzes = generate_questions("./questions.json")
-start_quiz(quizzes)
+if __name__ == '__main__':
+    quizzes = generate_questions("./questions.json")
+    start_quiz(quizzes)

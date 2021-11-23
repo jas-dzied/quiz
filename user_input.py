@@ -11,7 +11,7 @@ def invalid_choice(number):
     print(f"That is not a valid choice. Please provide a number in the range: 1-{number}.")
 
 INVALID_MESSAGE = 'That is not a valid choice.\
-Please select an option from the list above or its corresponding letter.'
+ Please select an option from the list above or its corresponding letter.'
 
 def choose_menu(prompt: str, options: list[str], default: int) -> str:
     """Displays a menu of options for the user to pick from"""
@@ -62,7 +62,7 @@ class MultipleChoice(Question):
         self.prompt = prompt
         self.options = options
         self.answer = answer
-        super().__init__("")
+        super().__init__(answer)
     def ask(self, number) -> int:
         print(f"==QUESTION {number}== (type = multiple choice)")
         print(f" {self.prompt}")
@@ -72,7 +72,7 @@ class MultipleChoice(Question):
         while True:
             choice = input(' :: ')
             if choice in self.options:
-                if choice == self.answer:
+                if choice.lower().strip() == self.answer.lower().strip():
                     correct_answer()
                     return 1
                 self.wrong_answer()
@@ -92,7 +92,7 @@ class SingleAnswer(Question):
     def __init__(self, prompt: str, answer: str) -> None:
         self.prompt = prompt
         self.answer = answer
-        super().__init__("")
+        super().__init__(answer)
     def ask(self, number: int) -> int:
         print(f"==QUESTION {number}== (type = single answer)")
         print(f" {self.prompt}")
