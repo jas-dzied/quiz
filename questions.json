@@ -1,0 +1,43 @@
+{
+    "Countries": [
+        {
+            "type": "multiple choice",
+            "prompt": "What is the capital of France?",
+            "answer": "Paris",
+            "options": [
+                "Paris",
+                "Madrid",
+                "Lisbon",
+                "London"
+            ]
+        },
+        {
+            "type": "single answer",
+            "prompt": "How many countries are there in Europe?",
+            "answer": "45"
+        },
+        {
+            "type": "options",
+            "prompt": "Name a country that borders China",
+            "answers": [
+                "Nepal",
+                "Vietnam",
+                "Russia",
+                "Mongolia"
+            ]
+        }
+    ],
+    "Movies": [
+        {
+            "type": "multiple choice",
+            "prompt": "Which one is correct?",
+            "answer": "correct",
+            "options": [
+                "correct",
+                "wrong",
+                "wrong2",
+                "wrong3"
+            ]
+        }
+    ]
+}
