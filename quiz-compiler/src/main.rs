@@ -1,12 +1,34 @@
+extern crate argparse;
+
+use argparse::{ArgumentParser, Store};
 use std::fs;
 use std::fs::File;
 use std::io::prelude::*;
 
-const SOURCE_FILE_PATH: &str = "/home/jas/Documents/Programming/Projects/quiz/questions.qz";
-const DEST_FILE_PATH: &str = "/home/jas/Documents/Programming/Projects/quiz/questions2.json";
-
 fn main() {
-    let contents = fs::read_to_string(SOURCE_FILE_PATH)
+
+    let mut source = String::new();
+    let mut dest = String::from("NULL");
+
+    {
+        let mut parser = ArgumentParser::new();
+        parser.set_description("Generates a .json file based off a .qz file that follows a simple format");
+        parser.refer(&mut source)
+              .add_argument("source", Store, "The source file")
+              .required();
+        parser.refer(&mut dest)
+              .add_argument("destination", Store, "The destination file");
+        parser.parse_args_or_exit();
+    }
+
+    if dest == String::from("NULL") {
+        dest = source.clone();
+        dest.pop();
+        dest.pop();
+        dest.push_str("json");
+    }
+
+    let contents = fs::read_to_string(source)
         .expect("Failed to open questions source file");
 
     let quiz_list: Vec<&str> = contents.split("###").collect();
@@ -80,6 +102,6 @@ fn main() {
     result.pop();
     result.pop();
     result.push_str("\n}");
-    let mut file = File::create(DEST_FILE_PATH).expect("Failed to open destination file");
+    let mut file = File::create(dest).expect("Failed to open destination file");
     file.write_all(result.as_bytes()).expect("Failed to write to file");
 }
