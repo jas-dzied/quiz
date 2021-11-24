@@ -54,6 +54,9 @@ def generate_questions(file_path: str) -> dict[str, list[Question]]:
         result[name] = question_list
     return result
 
+DEFAULT_PATH = "/home/jas/Documents/Programming/Projects/quiz/questions.json"
+
 if __name__ == '__main__':
-    quizzes = generate_questions("./questions.json")
+    questions_path = sys.argv[1] if len(sys.argv) != 1 else DEFAULT_PATH
+    quizzes = generate_questions(questions_path)
     start_quiz(quizzes)
