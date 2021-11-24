@@ -1,6 +1,5 @@
-*.py[cod]
-*.egg
-build
-htmlcov
-__pycache__/
-.mypy_cache/
+runtime/__pycache__/
+runtime/.mypy_cache/
+
+quiz-compiler/target/
+quiz-compiler/Cargo.lock
