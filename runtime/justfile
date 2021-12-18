@@ -1,0 +1,39 @@
+type_check := 'mypy'
+alias tc := type_check
+lint := 'python -m pylint'
+
+# Default recipe (lists recipes)
+_default:
+    just --list
+
+# Lint file
+lint target='all':
+    @if [ {{target}} = 'all' ]; then \
+         echo {{lint}} main.py; \
+         {{lint}} main.py; \
+         echo {{lint}} user_input.py; \
+         {{lint}} user_input.py; \
+    else \
+         echo {{lint}} {{target}}; \
+         {{lint}} {{target}}; \
+    fi
+
+# Type check file
+type_check target='all':
+    @if [ {{target}} = 'all' ]; then \
+         echo {{type_check}} main.py; \
+         {{type_check}} main.py; \
+         echo {{type_check}} user_input.py; \
+         {{type_check}} user_input.py; \
+    else \
+         echo {{type_check}} {{target}}; \
+         {{type_check}} {{target}}; \
+    fi
+
+check target='all':
+    @just type_check {{target}}
+    @just lint {{target}}
+
+# Run test cases
+test:
+    python test.py
