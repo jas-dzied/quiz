@@ -1,0 +1,41 @@
+{
+    "Cool": [
+        {
+            "type": "multiple choice",
+            "prompt": "wrong or right?",
+            "answer": "right",
+            "options": [
+                "wrong",
+                "wrong",
+                "wrong",
+                "right",
+                "wrong",
+                "wrong"
+            ]
+        },
+        {
+            "type": "single answer",
+            "prompt": "pog",
+            "answer": "pog"
+        },
+        {
+            "type": "options",
+            "prompt": "name a letter",
+            "answers": [
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f"
+            ]
+        }
+    ],
+    "cool2": [
+        {
+            "type": "single answer",
+            "prompt": "yes",
+            "answer": "yes"
+        }
+    ]
+}
