@@ -26,10 +26,10 @@ with open(fname, 'w') as file:
 
             if question_type == 'multiple choice':
                 file.write(input('What is the correct answer? ')+'\n')
+                print('Enter the options in the order they appear:')
+                print('(Leave it blank to stop adding options)')
                 run = True
                 while run:
-                    print('Enter the options in the order they appear:')
-                    print('(Leave it blank to stop adding options)')
                     choice = input(' :: ')
                     if choice == '':
                         run = False
