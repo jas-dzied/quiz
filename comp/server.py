@@ -4,7 +4,7 @@ import asyncio
 import websockets
 import json
 
-users = set()
+users = []
 started = False
 
 async def event_message(websocket, message):
@@ -44,15 +44,21 @@ async def ask_question():
     global question_index
 
     for ws in users:
-        score[ws] = 0
         answered[ws] = False
 
-    websockets.broadcast(users, json.dumps({
-        "event": "question",
-        "id": question_index,
-        "message": questions[question_index]["message"],
-        "options": questions[question_index]["options"]
-    }))
+    try:
+        websockets.broadcast(users, json.dumps({
+            "event": "question",
+            "id": question_index,
+            "message": questions[question_index]["message"],
+            "options": questions[question_index]["options"]
+        }))
+    finally:
+        websockets.broadcast(users, json.dumps({
+            "event": "leaderboard",
+            "id": question_index,
+            "scores": {f"Player {i}": score[ws] for i, ws in enumerate(score)}
+        }))
 
 async def handler(websocket):
 
@@ -69,7 +75,7 @@ async def handler(websocket):
 
                 if message == "JOIN" and websocket not in users:
 
-                    users.add(websocket)
+                    users.append(websocket)
                     await event_message(websocket, "Joined the lobby.")
 
                     if len(users) >= 2:
@@ -79,6 +85,8 @@ async def handler(websocket):
                         }))
                         started = True
 
+                        for ws in users:
+                            score[ws] = 0
                         await ask_question()
 
                 elif message == "JOIN":
@@ -110,13 +118,11 @@ async def handler(websocket):
                             await ask_question()
 
 
-
-
     finally:
         users.remove(websocket)
 
 async def main():
-    async with websockets.serve(handler, "localhost", 8004):
+    async with websockets.serve(handler, port=42069):
         await asyncio.Future()
 
 asyncio.run(main())

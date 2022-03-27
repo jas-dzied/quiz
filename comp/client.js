@@ -3,7 +3,7 @@ let send_button = document.getElementById("send");
 join_button.addEventListener("click", join_lobby);
 send_button.addEventListener("click", send_message);
 
-let ws = new WebSocket("ws://localhost:8004");
+let ws = new WebSocket("ws://82.35.235.223:42069");
 let started = false;
 
 ws.onopen = function() {
@@ -19,6 +19,17 @@ ws.onmessage = function(event) {
         started = true;
         join_button.remove();
         send_button.remove();
+    }
+    else if (message.event === "leaderboard") {
+        scores = message.scores
+        qid = message.id
+        for (let player in scores) {
+            let info = document.createElement("p");
+            info.innerHTML = player+": "+scores[player];
+            info.className = qid.toString();
+            document.body.append(info);
+        }
+        console.log(message);
     }
     else if (message.event === "question") {
         question = message.message;
@@ -60,7 +71,6 @@ function answer_question(qid, answer) {
     }));
 
     let related = document.getElementsByClassName(qid.toString());
-    console.log(related);
     while (related[0]) {
         related[0].parentNode.removeChild(related[0]);
     }
