@@ -120,7 +120,7 @@ class SocketServer:
 
 async def main():
     server = SocketServer()
-    async with websockets.serve(server.handle, port=42069):
+    async with websockets.serve(server.handle, port=4097):
         await asyncio.Future()
 
 asyncio.run(main())
