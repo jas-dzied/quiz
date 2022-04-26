@@ -1,4 +1,4 @@
-let ws = new WebSocket("ws://82.35.235.223:42069");
+let ws = new WebSocket("ws://82.35.235.223:4097");
 
 function delete_class(id) {
     var paras = document.getElementsByClassName(id);
